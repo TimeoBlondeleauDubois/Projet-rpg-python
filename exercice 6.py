@@ -197,7 +197,7 @@ def shop():
   else:
       print("\ndonnée incorrecte, veuillez recommencer\n")
       shop()
-  
+
 
 def faire_combat():
   global hp_du_perso
@@ -435,4 +435,4 @@ def menu():
         except ValueError:
             print("Donnée saise incorrecte")
             verif = 0
-display_player_data2()
+menu()
