@@ -435,4 +435,4 @@ def menu():
         except ValueError:
             print("Donnée saise incorrecte")
             verif = 0
-menu()
+display_player_data2()
