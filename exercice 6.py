@@ -349,6 +349,9 @@ def histoire():
       choix = 1
 
 # create_player_data()
+
+# ajoute un joueur vvvvv
 # insert_player_data(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold)
+
 display_player_data()
-# histoire()
+# histoire()  
