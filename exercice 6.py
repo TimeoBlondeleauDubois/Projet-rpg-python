@@ -293,5 +293,5 @@ def histoire():
       faire_combat()
     elif choice == 'N':
       choix = 1
-
+      
 histoire()
