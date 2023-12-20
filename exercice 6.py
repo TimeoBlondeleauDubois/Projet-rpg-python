@@ -71,6 +71,8 @@ skip_turn = 0
 choix_shop = 0
 potion_de_soin = 3
 invalides = 0 
+menuchoix = 0
+verif = 0
 
 def level():
   global lvl
@@ -280,7 +282,7 @@ def afficher_texte_progressif(texte):
   for caractere in texte:
       sys.stdout.write(caractere)
       sys.stdout.flush()
-      time.sleep(0.0)
+      time.sleep(0.0250)
   print()
 
 def histoire():
@@ -348,10 +350,26 @@ def histoire():
     elif choice == 'N':
       choix = 1
 
-# create_player_data()
-
-# ajoute un joueur vvvvv
-# insert_player_data(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold)
-
-display_player_data()
-# histoire()  
+def menu():
+    global menuchoix
+    global verif
+    print("Voulez-vous :\n1- Continuer une partie\n2- Créer un nouveau joueur\n3- Quitter")
+    while verif == 0:
+        try:
+            menuchoix = int(input("Entrer votre choix : "))
+            if menuchoix == 1:
+                verif = 1
+                histoire()
+            elif menuchoix == 2:
+                verif = 1
+                print("Pas encore fait")
+            elif menuchoix == 3:
+                verif = 1
+                sys.exit()
+            else:
+                print("Donnée saisie incorrecte")
+                verif = 0
+        except ValueError:
+            print("Donnée saise incorrecte")
+            verif = 0
+menu()
