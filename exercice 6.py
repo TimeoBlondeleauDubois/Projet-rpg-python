@@ -93,7 +93,10 @@ def reset_stats():
         {"nom": "Arcturus", "hp": 1690, "atk": 69, "xp": 90, "gold": 9},
         {"nom": "Zodiac", "hp": 2500, "atk": 25, "xp": 75, "gold": 7.5},
         {"nom": "Void Wave", "hp": 2000, "atk": 25, "xp": 70, "gold": 7.0},
-        {"nom": "Abyss Of Darkness", "hp": 3000, "atk": 60, "xp": 9.5, "gold": 95}
+        {"nom": "Abyss Of Darkness", "hp": 3000, "atk": 60, "xp": 9.5, "gold": 9.5},
+        {"noms": "Slaughterhouse", "hp": 3500, "atk": 50, "xp": 9.5, "gold": 9.5},
+        {"nom": "Bloodbath", "hp": 1000, "atk": 80, "xp": 9.5, "gold": 9.5},
+        {"nom": "Kyouki", "hp": 4000, "atk": 50, "xp": 9.5, "gold": 12}
     ]
 
 def shop():
