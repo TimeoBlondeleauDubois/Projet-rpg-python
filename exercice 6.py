@@ -3,35 +3,58 @@ import sys
 import time
 import sqlite3
 
-# function create player table (pas fini)
-def create_player_table(): 
-  try: 
-    connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
-    cursor = connection.cursor()
-    cursor.execute("""
-      create table if not exists player_data(
-                  player_id integer primary key autoincrement unique not null,
-                  player_name text not null,
-                  player_class text null,
-                  player_hpmax integer null,
-                  player_hp integer null,
-                  player_atk integer null,
-                  player_magie integer null,
-                  player_lvl integer null,
-                  player_xp integer null,
-                  player_gold integer null
-      )
-  """)
-    connection.commit()
-  finally:
-    connection.close()
+# Initialiser la connexion à None
+connection = None
+
+# Fonction pour créer la table des joueurs (non terminée)
+def create_player_table():
+    global connection  # Déclarer la connexion comme une variable globale
+    try:
+        connection = sqlite3.connect('Rpg.db')
+        cursor = connection.cursor()
+        cursor.execute("""
+            create table if not exists player_data2(
+                        player_name text not null,
+                        player_class text not null,
+                        hp_du_perso_max integer not null,
+                        hp_du_perso integer not null,
+                        atk integer not null,
+                        magie integer not null,
+                        lvl integer not null,
+                        xp integer not null,
+                        perdu integer not null,
+                        message integer not null,
+                        messages integer not null,
+                        augmenter integer not null,
+                        gold integer not null,
+                        fuite_unlock integer not null,
+                        fuite integer not null,
+                        choix integer not null,
+                        choice integer not null,
+                        skip_turn integer not null,
+                        choix_shop integer not null,
+                        potion_de_soin integer not null,
+                        invalides integer not null,
+                        menuchoix integer not null,
+                        verif integer not null,
+                        nom_perso text not null
+            )
+        """)
+        connection.commit()
+    finally:
+        if connection is not None:
+            connection.close()
+
+# Le reste de votre code reste inchangé...
+
+
 
 # function affiche liste joueur
-def display_player_data():
+def display_player_data2():
     try:
-        connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
+        connection = sqlite3.connect('Rpg.db')
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM player_data")
+        cursor.execute("SELECT * FROM player_data2")
         players = cursor.fetchall()
         print("Liste des joueurs :")
         for player in players:
@@ -40,17 +63,17 @@ def display_player_data():
         connection.close()
 
 # function ajouter un joueur dans la base de données(pas fini)
-def insert_player_data(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold):
-   connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
+def insert_player_data2(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,perdu,message,messages,augmenter,gold,fuite_unlock,fuite,choix,choice,skip_turn,choix_shop,potion_de_soin,invalides,menuchoix,verif,nom_perso):
+   connection = sqlite3.connect('Rpg.db')
    cursor = connection.cursor()
    cursor.execute("""
-        insert into player_data (player_name, player_class, player_hpmax, player_hp, player_atk, player_magie, player_lvl, player_xp, player_gold)
-                  values (?,?,?,?,?,?,?,?,?)
-""", (player_name, player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold))
+        insert into player_data2 (player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,perdu,message,messages,augmenter,gold,fuite_unlock,fuite,choix,choice,skip_turn,choix_shop,potion_de_soin,invalides,menuchoix,verif,nom_perso)
+                  values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+""", (player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,perdu,message,messages,augmenter,gold,fuite_unlock,fuite,choix,choice,skip_turn,choix_shop,potion_de_soin,invalides,menuchoix,verif,nom_perso))
    connection.commit()
    connection.close()
 
-player_name = 'Jean Cule'
+player_name = ""
 player_class = 'Merde Ultime'
 hp_du_perso_max = 1000
 hp_du_perso = 1000
@@ -73,6 +96,7 @@ potion_de_soin = 3
 invalides = 0 
 menuchoix = 0
 verif = 0
+nom_perso = ""
 
 def level():
   global lvl
@@ -275,14 +299,14 @@ def faire_combat():
         print ("donée invalide")
         invalides = 0
         continue
-    
+  update_player_data2_by_name(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,perdu,message,messages,augmenter,gold,fuite_unlock,fuite,choix,choice,skip_turn,choix_shop,potion_de_soin,invalides,menuchoix,verif,nom_perso)
   return hp_du_perso, atk, magie, xp, hp_du_perso_max, gold
 
 def afficher_texte_progressif(texte):
   for caractere in texte:
       sys.stdout.write(caractere)
       sys.stdout.flush()
-      time.sleep(0.0250)
+      time.sleep(0.0)
   print()
 
 def histoire():
@@ -350,9 +374,45 @@ def histoire():
     elif choice == 'N':
       choix = 1
 
+def update_player_data2_by_name(player_name, player_class, hp_du_perso_max, hp_du_perso, atk, magie, lvl, xp, perdu, message, messages, augmenter, gold, fuite_unlock, fuite, choix, choice, skip_turn, choix_shop, potion_de_soin, invalides, menuchoix, verif, nom_perso):
+    connection = sqlite3.connect('Rpg.db')
+    cursor = connection.cursor()
+    cursor.execute("""
+        UPDATE player_data2
+        SET player_name = ?,
+            player_class = ?,
+            hp_du_perso_max = ?,
+            hp_du_perso = ?,
+            atk = ?,
+            magie = ?,
+            lvl = ?,
+            xp = ?,
+            perdu = ?,
+            message = ?,
+            messages = ?,
+            augmenter = ?,
+            gold = ?,  -- Remplacez la virgule par un égal ici
+            fuite_unlock = ?,
+            fuite = ?,
+            choix = ?,
+            choice = ?,
+            skip_turn = ?,
+            choix_shop = ?,
+            potion_de_soin = ?,
+            invalides = ?,
+            menuchoix = ?,  -- Corrigez également ici
+            verif = ?,
+            nom_perso = ?
+        WHERE player_name = ?
+    """, (player_name, player_class, hp_du_perso_max, hp_du_perso, atk, magie, lvl, xp, perdu, message, messages, augmenter, gold, fuite_unlock, fuite, choix, choice, skip_turn, choix_shop, potion_de_soin, invalides, menuchoix, verif, nom_perso, player_name))
+    connection.commit()
+    connection.close()
+
+
 def menu():
     global menuchoix
     global verif
+    global player_name
     print("Voulez-vous :\n1- Continuer une partie\n2- Créer un nouveau joueur\n3- Quitter")
     while verif == 0:
         try:
@@ -362,7 +422,10 @@ def menu():
                 histoire()
             elif menuchoix == 2:
                 verif = 1
-                print("Pas encore fait")
+                print("Choisissez le nom de votre personnage: ")
+                player_name = input()
+                insert_player_data2(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,perdu,message,messages,augmenter,gold,fuite_unlock,fuite,choix,choice,skip_turn,choix_shop,potion_de_soin,invalides,menuchoix,verif,nom_perso)
+                histoire()
             elif menuchoix == 3:
                 verif = 1
                 sys.exit()
@@ -372,4 +435,4 @@ def menu():
         except ValueError:
             print("Donnée saise incorrecte")
             verif = 0
-menu()
+display_player_data2()
