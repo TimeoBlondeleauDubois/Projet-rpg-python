@@ -3,7 +3,7 @@ import sys
 import time
 
 hp_du_perso_max = 1000
-hp_du_perso = 751
+hp_du_perso = 10000
 atk = 100
 magie = 100
 lvl = 0
@@ -205,6 +205,7 @@ def faire_combat():
     if hp_du_perso > hp_du_perso_max:
       hp_du_perso = hp_du_perso_max
     print("vous avez ", hp_du_perso , "pv")
+    shop_choice = 0
     while invalides == 0:
       print("\nVoulez vous aller dans le shop?")
       print("1: Oui\n2: Non")
@@ -293,5 +294,5 @@ def histoire():
       faire_combat()
     elif choice == 'N':
       choix = 1
-      
+
 histoire()
