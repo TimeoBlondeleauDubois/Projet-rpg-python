@@ -7,6 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>Hello world</h1>
+                    <!-- On boucle sur la variable "players" -->
+
+                    {% for player in players %}
+                    <tr>
+                        <!-- On affiche les données dynamiquement -->
+                        <td class="border py-2 px-4">Id : {{ player.id }}</td>
+                        <td class="border py-2 px-4">Nom : {{ player.name }}</td>
+                        <td class="border py-2 px-4">Classe : {{ player.class }}</td>
+                        <td class="border py-2 px-4">
+
+                            <!-- On ajoute un bouton pour supprimer la donnée sur la route /delete/<id> -->
+                            <a href="/delete/{{player.id}}">
+                                <button class="bg-red-500 text-white py-1 px-2 rounded w-full">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}  
 </body>
 </html>

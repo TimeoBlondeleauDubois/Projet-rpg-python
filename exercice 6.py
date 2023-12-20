@@ -362,7 +362,7 @@ def menu():
                 histoire()
             elif menuchoix == 2:
                 verif = 1
-                print("Pas encore fait")
+                print("Bienvenue aventurier")
             elif menuchoix == 3:
                 verif = 1
                 sys.exit()
