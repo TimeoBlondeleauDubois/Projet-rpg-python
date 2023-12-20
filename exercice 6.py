@@ -1,9 +1,48 @@
 import random
 import sys
 import time
+import sqlite3
+
+# function create player table (pas fini)
+def create_player_data(): 
+  try: 
+    connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
+    cursor = connection.cursor()
+    cursor.execute("""
+      create table if not exists player_data(
+                  player_id integer primary key autoincrement unique not null,
+                  player_name text not null,
+                  player_class text null,
+                  player_hpmax integer null,
+                  player_hp integer null,
+                  player_atk integer null,
+                  player_magie integer null,
+                  player_lvl integer null,
+                  player_xp integer null,
+                  player_gold integer null
+      )
+  """)
+    connection.commit()
+  finally:
+    connection.close()
+
+# function affiche liste joueur
+def display_player_data():
+    try:
+        connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM player_data")
+        players = cursor.fetchall()
+        for player in players:
+            print(player)
+    finally:
+        connection.close()
+
+# function ajouter un joueur dans la base de données(pas fini)
+
 
 hp_du_perso_max = 1000
-hp_du_perso = 751
+hp_du_perso = 1000
 atk = 100
 magie = 100
 lvl = 0
@@ -294,4 +333,6 @@ def histoire():
     elif choice == 'N':
       choix = 1
 
-histoire()
+# create_player_data()
+display_player_data()
+# histoire()
