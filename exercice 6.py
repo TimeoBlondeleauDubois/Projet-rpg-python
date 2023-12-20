@@ -4,7 +4,7 @@ import time
 import sqlite3
 
 # function create player table (pas fini)
-def create_player_data(): 
+def create_player_table(): 
   try: 
     connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
     cursor = connection.cursor()
@@ -33,20 +33,27 @@ def display_player_data():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM player_data")
         players = cursor.fetchall()
+        print("Liste des joueurs :")
         for player in players:
             print(player)
     finally:
         connection.close()
 
 # function ajouter un joueur dans la base de données(pas fini)
+def insert_player_data(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold):
+   connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
+   cursor = connection.cursor()
+   cursor.execute("""
+        insert into player_data (player_name, player_class, player_hpmax, player_hp, player_atk, player_magie, player_lvl, player_xp, player_gold)
+                  values (?,?,?,?,?,?,?,?,?)
+""", (player_name, player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold))
+   connection.commit()
+   connection.close()
 
-
+player_name = 'Jean Cule'
+player_class = 'Merde Ultime'
 hp_du_perso_max = 1000
-<<<<<<< HEAD
 hp_du_perso = 1000
-=======
-hp_du_perso = 10000
->>>>>>> a930070987b94515f41351bf16e52288a45dae76
 atk = 100
 magie = 100
 lvl = 0
@@ -342,5 +349,6 @@ def histoire():
       choix = 1
 
 # create_player_data()
+# insert_player_data(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,magie,lvl,xp,gold)
 display_player_data()
 # histoire()
