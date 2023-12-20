@@ -50,6 +50,24 @@ def insert_player_data(player_name,player_class,hp_du_perso_max,hp_du_perso,atk,
    connection.commit()
    connection.close()
 
+# fonction update player
+def update_player_data_by_name(player_name, hp_du_perso_max, hp_du_perso, atk, magie, lvl, xp, gold):
+    connection = sqlite3.connect('Projet-rpg-python/Rpg.db')
+    cursor = connection.cursor()
+    cursor.execute("""
+        UPDATE player_data
+        SET player_hpmax = ?,
+            player_hp = ?,
+            player_atk = ?,
+            player_magie = ?,
+            player_lvl = ?,
+            player_xp = ?,
+            player_gold = ?
+        WHERE player_name = ?
+""", (hp_du_perso_max, hp_du_perso, atk, magie, lvl, xp, gold, player_name))
+    connection.commit()
+    connection.close()
+
 player_name = 'Jean Cule'
 player_class = 'Merde Ultime'
 hp_du_perso_max = 1000
@@ -70,7 +88,8 @@ choice = ""
 skip_turn = 0
 choix_shop = 0
 potion_de_soin = 3
-invalides = 0 
+invalides = 0
+
 menuchoix = 0
 verif = 0
 
@@ -135,8 +154,6 @@ def augmenter_les_stats():
   augmenter = 0
   return hp_du_perso_max, atk, magie, augmenter
 
-
-
 def reset_stats():
     return [
         {"nom": "Acheron", "hp": 1600, "atk": 75, "xp": 100, "gold": 10},
@@ -174,7 +191,6 @@ def shop():
       print("\ndonnée incorrecte, veuillez recommencer\n")
       shop()
   
-
 def faire_combat():
   global hp_du_perso
   global atk
@@ -372,4 +388,6 @@ def menu():
         except ValueError:
             print("Donnée saise incorrecte")
             verif = 0
-menu()
+# menu()
+            
+display_player_data()
