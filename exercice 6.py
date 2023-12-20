@@ -42,7 +42,11 @@ def display_player_data():
 
 
 hp_du_perso_max = 1000
+<<<<<<< HEAD
 hp_du_perso = 1000
+=======
+hp_du_perso = 10000
+>>>>>>> a930070987b94515f41351bf16e52288a45dae76
 atk = 100
 magie = 100
 lvl = 0
@@ -132,7 +136,10 @@ def reset_stats():
         {"nom": "Arcturus", "hp": 1690, "atk": 69, "xp": 90, "gold": 9},
         {"nom": "Zodiac", "hp": 2500, "atk": 25, "xp": 75, "gold": 7.5},
         {"nom": "Void Wave", "hp": 2000, "atk": 25, "xp": 70, "gold": 7.0},
-        {"nom": "Abyss Of Darkness", "hp": 3000, "atk": 60, "xp": 9.5, "gold": 95}
+        {"nom": "Abyss Of Darkness", "hp": 3000, "atk": 60, "xp": 9.5, "gold": 9.5},
+        {"noms": "Slaughterhouse", "hp": 3500, "atk": 50, "xp": 9.5, "gold": 9.5},
+        {"nom": "Bloodbath", "hp": 1000, "atk": 80, "xp": 9.5, "gold": 9.5},
+        {"nom": "Kyouki", "hp": 4000, "atk": 50, "xp": 9.5, "gold": 12}
     ]
 
 def shop():
@@ -244,6 +251,7 @@ def faire_combat():
     if hp_du_perso > hp_du_perso_max:
       hp_du_perso = hp_du_perso_max
     print("vous avez ", hp_du_perso , "pv")
+    invalides = 0
     while invalides == 0:
       print("\nVoulez vous aller dans le shop?")
       print("1: Oui\n2: Non")
@@ -265,7 +273,7 @@ def afficher_texte_progressif(texte):
   for caractere in texte:
       sys.stdout.write(caractere)
       sys.stdout.flush()
-      time.sleep(0.025)
+      time.sleep(0.0)
   print()
 
 def histoire():
