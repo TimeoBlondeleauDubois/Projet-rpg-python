@@ -205,7 +205,7 @@ def faire_combat():
     if hp_du_perso > hp_du_perso_max:
       hp_du_perso = hp_du_perso_max
     print("vous avez ", hp_du_perso , "pv")
-    shop_choice = 0
+    invalides = 0
     while invalides == 0:
       print("\nVoulez vous aller dans le shop?")
       print("1: Oui\n2: Non")
@@ -227,7 +227,7 @@ def afficher_texte_progressif(texte):
   for caractere in texte:
       sys.stdout.write(caractere)
       sys.stdout.flush()
-      time.sleep(0.025)
+      time.sleep(0.0)
   print()
 
 def histoire():
