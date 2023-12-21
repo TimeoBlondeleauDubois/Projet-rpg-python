@@ -2,11 +2,12 @@ import random
 import sys
 import time
 import sqlite3
+from flask import Flask, jsonify
 
-# Initialiser la connexion à None
+app = Flask(__name__)
+
 connection = None
 
-# Fonction pour créer la table des joueurs (non terminée)
 def create_player_table():
     global connection  # Déclarer la connexion comme une variable globale
     try:
@@ -435,4 +436,25 @@ def menu():
         except ValueError:
             print("Donnée saise incorrecte")
             verif = 0
+            
+@app.route('/players', methods=['GET'])
+def get_players():
+    try:
+        connection = sqlite3.connect('Rpg.db')
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM player_data2")
+        players = cursor.fetchall()
+        player_list = [{"player_name": player[0], "player_class": player[1], "hp_du_perso_max": player[2], "hp_du_perso": player[3],
+                        "atk": player[4], "magie": player[5], "lvl": player[6], "xp": player[7], "perdu": player[8],
+                        "message": player[9], "messages": player[10], "augmenter": player[11], "gold": player[12],
+                        "fuite_unlock": player[13], "fuite": player[14], "choix": player[15], "choice": player[16],
+                        "skip_turn": player[17], "choix_shop": player[18], "potion_de_soin": player[19],
+                        "invalides": player[20], "menuchoix": player[21], "verif": player[22], "nom_perso": player[23]}
+                       for player in players]
+        return jsonify(player_list)
+    finally:
+        connection.close()
+
+if __name__ == '__main__':
+    app.run(debug=True)
 display_player_data2()
